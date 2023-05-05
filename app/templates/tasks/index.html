@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block meta_title %} List of all tasks {% endblock %}
+
+
+{% block content %}
+
+            <div class="h3 m-0"><a href="{{ url_for('tasks.create_task') }}" title="Add new task"><i class="bi bi-plus-square"></i></a></div>
+            <table class="table table-bordered">
+              <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>TASK</th>
+                            <th>DEAD LINE</th>
+                            <th>COMPLETED</th>
+                            <th>AUTHOR</th>
+                            <th>EDITOR</th>
+                        </tr>
+              </thead>
+              <tbody>
+                    {% for tasks in object_list.items %}
+                        <tr>
+                             <td>{{ tasks.id }}</td>
+                             <td>{{ tasks.name }}</td>
+                             <td>{{ tasks.deadline }}</td>
+                             <td>{% if tasks.completed %}Выполненна{% else %} Не выполнено {% endif %}</td>
+                             <td>{{ tasks.user_task.username }}</td>
+                             <td><div class="m-0 h4"><a href="/task/remove/{{tasks.id}}" title="Remove task"><i class="bi bi-x-square"></i></a> <a href="/task/update/{{tasks.id}}" title="Update task"><i class="bi bi-pencil-square"></i></a></div></td>
+                        </tr>
+                    {% endfor %}
+              </tbody>
+            </table>
+
+{% endblock %}
+
+{% block pagination %}
+    {% import "pagination.html" as pagination_macros %}
+    {{ pagination_macros.render_pagination(object_list, 'tasks.index') }}
+{% endblock pagination %}
+

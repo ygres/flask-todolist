@@ -1,0 +1,17 @@
+{% macro render_pagination(pagination, endpoint, ep_kwargs={}) %}
+    {% if pagination.pages > 1 %}
+        <nav aria-label="">
+          <ul class="pagination pagination-sm">
+              {%- for page in pagination.iter_pages() %}
+                    {% if page %}
+                        {% if page != pagination.page %}
+                            <li class="page-item"><a class="page-link" href="{{ url_for(endpoint, page=page, **ep_kwargs) }}">{{ page }}</a></li>
+                        {% else %}
+                          <li class="page-item active" aria-current="page"><span class="page-link">{{ page }}</span></li>
+                        {% endif %}
+                    {% endif %}
+              {%- endfor %}
+          </ul>
+        </nav>
+    {% endif %}
+{% endmacro %}

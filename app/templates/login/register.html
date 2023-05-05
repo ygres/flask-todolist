@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block meta_title %} Create a new task {% endblock %}
+{% block content %}
+
+    {% include 'form-errors.html' %}
+    {% import 'form-macros.html' as macros %}
+
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        {% call macros.render_form(form, action_url=url_for("login.register"), action_text="Register", btn_class="btn btn-primary mt-2") %}
+            {{ macros.render_field(form.username, label_visible=True, placeholder="username", type="text", show_help=True) }}
+            {{ macros.render_field(form.email, label_visible=True, placeholder="email", type="email", show_help=True) }}
+            {{ macros.render_field(form.password, label_visible=True, placeholder="password", type="password", show_help=True) }}
+        <div class="form-group mt-2">
+            <label for="password_confirm" class="control-label"><label for="password_confirm">Повторите пароль</label></label>
+            <input class="form-control" type="password" placeholder="Repeat password" id="password_confirm" name="password_confirm">
+        </div>
+        {% endcall %}
+    </div>
+</div>
+{% endblock %}

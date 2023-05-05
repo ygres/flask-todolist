@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block meta_title %} Create a new task {% endblock %}
+{% block content %}
+
+    {% include 'form-errors.html' %}
+    {% import 'form-macros.html' as macros %}
+
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        {% call macros.render_form(form, action_url=url_for("login.auth"), action_text="Login", btn_class="btn btn-primary mt-2") %}
+            {{ macros.render_field(form.username, label_visible=True, placeholder="username", type="text", show_help=True) }}
+            {{ macros.render_field(form.password, label_visible=True, placeholder="password", type="password", show_help=True) }}
+        {% endcall %}
+    </div>
+</div>
+{% endblock %}
